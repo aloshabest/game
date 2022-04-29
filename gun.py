@@ -11,15 +11,17 @@ class Gun:
         self.rect.bottom = self.screen_rect.bottom
         self.mright = False
         self.mleft = False
-
+        self.center = float(self.rect.centerx)
 
     def output(self):
         self.screen.blit(self.image, self.rect)
 
 
     def update_gun(self):
+        self.rect.centerx = self.center
+
         if self.mright and self.rect.right < self.screen_rect.right:
-            self.rect.centerx += 1
+            self.center += 1.5
 
         if self.mleft and self.rect.left > 0:
-            self.rect.centerx -= 1
+            self.center -= 1.5
