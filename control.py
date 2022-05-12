@@ -27,11 +27,12 @@ def event(screen, gun, bullets):
             elif event.key == pygame.K_LEFT:
                 gun.mleft = False
 
-def update(bg_color, screen, gun, bullets):
+def update(bg_color, screen, gun, alien, bullets):
     screen.fill(bg_color)
     for bullet in bullets.sprites():
         bullet.draw()
     gun.output()
+    alien.draw()
     pygame.display.flip()
 
 def update_bullets(bullets):
