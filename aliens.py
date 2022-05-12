@@ -14,3 +14,7 @@ class Alien(pygame.sprite.Sprite):
 
     def draw(self):
         self.screen.blit(self.image, self.rect)
+
+    def update(self):
+        self.y += 0.1
+        self.rect.y = self.y
