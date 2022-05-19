@@ -53,7 +53,7 @@ def gun_kill(stats, screen, gun, aliens, bullets):
     aliens.empty()
     bullets.empty()
     create_army(screen, aliens)
-    time.sleep(2)
+    time.sleep(1)
     gun.create_gun()
 
 
@@ -61,6 +61,15 @@ def update_aliens(stats, screen, gun, aliens, bullets):
     aliens.update()
     if pygame.sprite.spritecollideany(gun, aliens):
         gun_kill(stats, screen, gun, aliens, bullets)
+    alines_check(stats, screen, gun, aliens, bullets)
+
+
+def alines_check(stats, screen, gun, aliens, bullets):
+    screen_rect = screen.get_rect()
+    for i in aliens.sprites():
+        if i.rect.bottom >= screen_rect.bottom:
+            gun_kill(stats, screen, gun, aliens, bullets)
+            break
 
 
 def create_army(screen, aliens):
