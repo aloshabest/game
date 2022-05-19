@@ -16,7 +16,7 @@ def run():
         control.event(screen, gun, bullets)
         gun.update_gun()
         control.update(bg_color, screen, gun, aliens, bullets)
-        control.update_bullets(bullets)
-        control.update_aliens(aliens)
+        control.update_bullets(aliens, bullets)
+        control.update_aliens(gun, aliens)
 
 run()
