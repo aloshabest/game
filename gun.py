@@ -1,5 +1,6 @@
 import pygame
 
+
 class Gun:
 
     def __init__(self, screen):
@@ -13,6 +14,7 @@ class Gun:
         self.mleft = False
         self.center = float(self.rect.centerx)
 
+
     def output(self):
         self.screen.blit(self.image, self.rect)
 
@@ -25,3 +27,7 @@ class Gun:
 
         if self.mleft and self.rect.left > 0:
             self.center -= 2.5
+
+
+    def create_gun(self):
+        self.center = self.screen_rect.centerx

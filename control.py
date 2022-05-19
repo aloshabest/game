@@ -2,6 +2,8 @@ import pygame
 import sys
 from bullet import Bullet
 from aliens import Alien
+import time
+
 
 def event(screen, gun, bullets):
     for event in pygame.event.get():
@@ -28,6 +30,7 @@ def event(screen, gun, bullets):
             elif event.key == pygame.K_LEFT:
                 gun.mleft = False
 
+
 def update(bg_color, screen, gun, aliens, bullets):
     screen.fill(bg_color)
     for bullet in bullets.sprites():
@@ -36,6 +39,7 @@ def update(bg_color, screen, gun, aliens, bullets):
     aliens.draw(screen)
     pygame.display.flip()
 
+
 def update_bullets(aliens, bullets):
     bullets.update()
     for bullet in bullets.copy():
@@ -43,10 +47,21 @@ def update_bullets(aliens, bullets):
             bullets.remove(bullet)
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
 
-def update_aliens(gun, aliens):
+
+def gun_kill(stats, screen, gun, aliens, bullets):
+    stats.guns_left -= 1
+    aliens.empty()
+    bullets.empty()
+    create_army(screen, aliens)
+    time.sleep(2)
+    gun.create_gun()
+
+
+def update_aliens(stats, screen, gun, aliens, bullets):
     aliens.update()
     if pygame.sprite.spritecollideany(gun, aliens):
-        print('!!!')
+        gun_kill(stats, screen, gun, aliens, bullets)
+
 
 def create_army(screen, aliens):
     alien = Alien(screen)
