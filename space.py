@@ -16,10 +16,11 @@ def run():
 
     while True:
         control.event(screen, gun, bullets)
-        gun.update_gun()
-        control.update(bg_color, screen, gun, aliens, bullets)
-        control.update_bullets(screen, aliens, bullets)
-        control.update_aliens(stats, screen, gun, aliens, bullets)
+        if stats.run_game:
+            gun.update_gun()
+            control.update(bg_color, screen, gun, aliens, bullets)
+            control.update_bullets(screen, aliens, bullets)
+            control.update_aliens(stats, screen, gun, aliens, bullets)
 
 
 run()

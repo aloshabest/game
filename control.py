@@ -53,12 +53,16 @@ def update_bullets(screen, aliens, bullets):
 
 
 def gun_kill(stats, screen, gun, aliens, bullets):
-    stats.guns_left -= 1
-    aliens.empty()
-    bullets.empty()
-    create_army(screen, aliens)
-    time.sleep(1)
-    gun.create_gun()
+    if stats.guns_left > 0:
+        stats.guns_left -= 1
+        aliens.empty()
+        bullets.empty()
+        create_army(screen, aliens)
+        time.sleep(1)
+        gun.create_gun()
+    else:
+        stats.run_game = False
+        sys.exit()
 
 
 def update_aliens(stats, screen, gun, aliens, bullets):
