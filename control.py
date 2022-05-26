@@ -31,8 +31,9 @@ def event(screen, gun, bullets):
                 gun.mleft = False
 
 
-def update(bg_color, screen, gun, aliens, bullets):
+def update(bg_color, screen, stats, scr, gun, aliens, bullets):
     screen.fill(bg_color)
+    scr.show_score()
     for bullet in bullets.sprites():
         bullet.draw()
     gun.output()
