@@ -41,12 +41,17 @@ def update(bg_color, screen, stats, scr, gun, aliens, bullets):
     pygame.display.flip()
 
 
-def update_bullets(screen, aliens, bullets):
+def update_bullets(screen, stats, scr, aliens, bullets):
     bullets.update()
     for bullet in bullets.copy():
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
+    if collisions:
+        for aliens in collisions.values():
+            stats.score += 10 * len(aliens)
+        scr.image_score()
+        check_high_score(stats, scr)
     if len(aliens) == 0:
         bullets.empty()
         create_army(screen, aliens)
@@ -98,3 +103,9 @@ def create_army(screen, aliens):
             aliens.add(alien)
 
 
+def check_high_score(stats, scr):
+    if stats.score > stats.high_score:
+        stats.high_score = stats.score
+        scr.image_high_score()
+        with open('record.txt', 'w') as f:
+            f.write(str(stats.high_score))
