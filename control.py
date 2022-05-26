@@ -52,15 +52,17 @@ def update_bullets(screen, stats, scr, aliens, bullets):
             stats.score += 10 * len(aliens)
         scr.image_score()
         check_high_score(stats, scr)
+        scr.image_guns()
     if len(aliens) == 0:
         bullets.empty()
         create_army(screen, aliens)
 
 
 
-def gun_kill(stats, screen, gun, aliens, bullets):
+def gun_kill(stats, screen, scr, gun, aliens, bullets):
     if stats.guns_left > 0:
         stats.guns_left -= 1
+        scr.image_guns()
         aliens.empty()
         bullets.empty()
         create_army(screen, aliens)
@@ -71,18 +73,18 @@ def gun_kill(stats, screen, gun, aliens, bullets):
         sys.exit()
 
 
-def update_aliens(stats, screen, gun, aliens, bullets):
+def update_aliens(stats, screen, scr, gun, aliens, bullets):
     aliens.update()
     if pygame.sprite.spritecollideany(gun, aliens):
-        gun_kill(stats, screen, gun, aliens, bullets)
-    alines_check(stats, screen, gun, aliens, bullets)
+        gun_kill(stats, screen, scr, gun, aliens, bullets)
+    alines_check(stats, screen, scr, gun, aliens, bullets)
 
 
-def alines_check(stats, screen, gun, aliens, bullets):
+def alines_check(stats, screen, scr, gun, aliens, bullets):
     screen_rect = screen.get_rect()
     for i in aliens.sprites():
         if i.rect.bottom >= screen_rect.bottom:
-            gun_kill(stats, screen, gun, aliens, bullets)
+            gun_kill(stats, screen, scr, gun, aliens, bullets)
             break
 
 
